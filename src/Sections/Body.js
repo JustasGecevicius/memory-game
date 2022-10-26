@@ -1,46 +1,99 @@
 import { useEffect, useState } from "react";
-import { GameDisplay } from "./GameDisplay";
 
-export const Body = ({updateCurrentScore, updateLevelCount, level}) => {
+export const Body = ({
+  setClickCount,
+  setCurrentScore,
+  updateCurrentScore,
+  levelCount,
+  setLevelCount,
+}) => {
+  let files = require.context("/public/Pokemon", false, /\.(png|jpe?g|svg)$/);
 
-    let files = require.context('/public/Pokemon', false, /\.(png|jpe?g|svg)$/);
-   
-    function importAll(r) {
-      let images = {};
-      r.keys().forEach((item, index) => { images[item.replace('./', '')] = r(item); });
-      return images
-    }
-    const images = importAll(files);
+  function importAll(r) {
+    let images = {};
+    r.keys().forEach((item, index) => {
+      images[item.replace("./", "")] = r(item);
+    });
+    return images;
+  }
+  const images = importAll(files);
+  //console.log(images);
+  const [currentLevelObject, setcurrentLevelObject] = useState({});
+  const [shuffleArray, setShuffleArray] = useState([]);
 
-   // console.log(level);
-    //const [lost, setLost] = useState(false);
-    const [currentLevel, setCurrentLevel] = useState([]);
-
-    const createLevelArray = (level) => {
-        const numberOfCards = level * 3;
-        let gameArr = Object.keys(images).map((key, index) => {
-            if(index < numberOfCards){
-                return {[key]:images[key]}
-            }
-        })
-        gameArr = gameArr.filter((elem) => elem !== undefined);
-
-        return gameArr;
-    }
-
-    useEffect(() => {
-        setCurrentLevel((prev) => createLevelArray(level));
-    },[level]);
-
-    const handleImageClick = () => {
-        setCurrentLevel((prev) => prev.sort((a, b) => 0.5 - Math.random()));
+  const createLevelObject = (levelCount) => {
+    const numberOfCards = levelCount * 3;
+    const gameObject = {};
+    const imagesKeys = Object.keys(images);
+    for (let i = 0; i < numberOfCards; i++) {
+      gameObject[Math.random()] = {
+        location: images[imagesKeys[i]],
+        clicked: false,
+      };
     }
 
-    return(
-        <div className="body">
-            <button onClick={updateLevelCount}>Update Count</button>   
-            <GameDisplay currentLevel={currentLevel} handleImageClick={handleImageClick}/>
+    return gameObject;
+  };
 
-        </div>
-    )
-}
+  useEffect(() => {
+    if (levelCount === 0) {
+      setLevelCount(1);
+    } else {
+      //console.log(levelCount);
+      setcurrentLevelObject((prev) => createLevelObject(levelCount));
+    }
+  }, [levelCount]);
+
+  useEffect(() => {
+    //console.log(currentLevelObject);
+
+    setShuffleArray(shuffle(Object.entries(currentLevelObject)));
+  }, [currentLevelObject]);
+
+  const shuffle = (array) => {
+    return [...array].sort((a, b) => 0.5 - Math.random());
+  };
+
+  const updatecurrentLevelObject = (updateId) => {
+    setcurrentLevelObject((prev) => {
+      return { ...prev, [updateId]: { ...prev[updateId], ["clicked"]: true } };
+    });
+  };
+
+  const resetGame = () => {
+    setLevelCount(0);
+    setCurrentScore(0);
+    setClickCount(0);
+  };
+
+  const handleImageClick = (event) => {
+    event.preventDefault();
+    if (currentLevelObject[event.target.id]["clicked"] === false) {
+      updateCurrentScore();
+      //console.log("first time");
+      updatecurrentLevelObject(event.target.id);
+    } else {
+      //console.log("reset game");
+      resetGame();
+    }
+  };
+
+  return (
+    <div className="body">
+      <div className="gameDiv">
+        {shuffleArray.map((key, index) => {
+          return (
+            <div key={index}>
+              <img
+                onClick={handleImageClick}
+                alt="pokemon"
+                src={key[1]["location"]}
+                id={key[0]}
+              />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
