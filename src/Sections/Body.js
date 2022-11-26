@@ -30,6 +30,7 @@ export const Body = ({
         location: images[imagesKeys[i]],
         clicked: false,
       };
+      //console.log(gameObject);
     }
 
     return gameObject;
@@ -82,6 +83,7 @@ export const Body = ({
     <div className="body">
       <div className="gameDiv">
         {shuffleArray.map((key, index) => {
+          console.log(key);
           return (
             <div key={index}>
               <img
