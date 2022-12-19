@@ -1,70 +1,27 @@
-# Getting Started with Create React App
+# Memory Game
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+This game was my first app created with React. It is a single page application. Its main purpose was to teach me how to use useState and useEffect. With useState I was following variables like clickedItems, badClicks, currentScore and bestScore. The purpose of the game is to click each picture once and only once. Clicking twice would result in a loss. After each click the element are shuffled, therefore the user has to remember which elements have already been clicked
 
-In the project directory, you can run:
+## Technologies used
 
-### `npm start`
+### `React`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+I started the project using create-react-app, removed most of the default code that came with the app and started my project with a clean slate. I chose React because after consulting with a few industry professionals and looking at the local trends it seemed like this was the most popular technology at the moment
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### `HTML/JSX/CSS/Javascript`
 
-### `npm test`
+When it comes to the basics of Web Dev this project helped me to solidify the principles of object manipulation, tracking state and user inputs
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Problems I Encountered
 
-### `npm run build`
+### Tracking of element locations
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Since the array elements were constantly shuffled after each click I could not use the array indexes as a reliable indicator of which picture was clicked. I had to create a seperate object that was static and had IDs of each picture and then from that object create the shuffled array and DOM elements with the same IDs.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Final Remarks
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+There are still a few functionalities I want to add, like user login and authentication which would allow for the highschore to be tracked or simple animations when the elements are clicked and shuffled, but this is more or less a finished website. If you have any suggestions feel free to contact me through my Portfolio website here => https://justasgecevicius.github.io/Portfolio-Website
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This Project is for educational purposes only and is not meant to infringe on or use any copyright material for monetary purposes.  
